@@ -2,7 +2,7 @@
     "data_file": "data/venice/gis_osm_buildings_a_free_1.shx",
     "output_name": "venice-new",
     "city_name": "venice",
-    "center": [12.3308, 45.4383],
+    "center": [12.3308, 45.4343],
     "title_font": "fonts/FiraCode.ttf",
     "title_size": 128,
     "subtitle_font": "fonts/FiraCode.ttf",

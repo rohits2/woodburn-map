@@ -2,7 +2,7 @@
     "data_file": "data/san-francisco/gis_osm_buildings_a_free_1.shx",
     "output_name": "san-francisco-new",
     "city_name": "san francisco",
-    "center": [-122.40353, 37.7954],
+    "center": [-122.39753, 37.7954],
     "title_font": "fonts/FiraCode.ttf",
     "title_size": 128,
     "subtitle_font": "fonts/FiraCode.ttf",

@@ -1,0 +1,13 @@
+{
+    "data_file": "data/paris/gis_osm_buildings_a_free_1.shx",
+    "output_name": "paris-new",
+    "city_name": "paris",
+    "center": [2.28704, 48.86826],
+    "title_font": "fonts/FiraCode.ttf",
+    "title_size": 128,
+    "subtitle_font": "fonts/FiraCode.ttf",
+    "subtitle_size": 48,
+    "horiz_radius": 1600,
+    "vert_radius": 2400,
+    "y_res": 8192
+}

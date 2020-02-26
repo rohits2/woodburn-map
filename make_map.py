@@ -103,7 +103,7 @@ def rasterize_geometry(geometry: gpd.GeoSeries, bbox: MercatorBbox, y_res: int):
     draw = Draw(img)
     for polygon in img_geometry:
         if type(polygon) != Polygon:
-            print(f"Skipping non-polygon {type(polygon)}!")
+            logger.warning(f"Skipping non-polygon {type(polygon)}!")
             continue
         draw.polygon(list(polygon.exterior.coords), fill=1)
         for interior_hole in polygon.interiors:
@@ -135,10 +135,10 @@ def add_text(img: Image, draw: Draw, city_name: str, dms_str:str, title_font, su
 
     name = " ".join(city_name.upper())
     draw.rectangle(((0, im_h-box_start_offset), (box_width, im_h-box_end_offset)), fill=0, outline=1)
-    draw.text((150, im_h-title_offset), name, fill=1, font=title_font)
-    draw.text((150, im_h-subtitle1_offset), dms_str, fill=1, font=subtitle_font)
+    draw.text((box_x_start, im_h-title_offset), name, fill=1, font=title_font)
+    draw.text((box_x_start, im_h-subtitle1_offset), dms_str, fill=1, font=subtitle_font)
     if subtitle is not None:
-        draw.text((150, im_h-subtitle2_offset), subtitle, fill=1, font=subtitle_font)
+        draw.text((box_x_start, im_h-subtitle2_offset), subtitle, fill=1, font=subtitle_font)
 
 def convert_for_lasing(img: Image) -> np.ndarray:
     img = np.array(img)

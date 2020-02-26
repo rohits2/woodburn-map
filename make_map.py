@@ -139,7 +139,17 @@ def add_text(img: Image, draw: Draw, city_name: str, dms_str:str, title_font, su
     draw.text((150, im_h-subtitle1_offset), dms_str, fill=1, font=subtitle_font)
     if subtitle is not None:
         draw.text((150, im_h-subtitle2_offset), subtitle, fill=1, font=subtitle_font)
+
+def convert_for_lasing(img: Image) -> np.ndarray:
     img = np.array(img)
+    h, w = img.shape
+    lase_mask = np.zeros((h, w, 3), np.uint8)
+    lase_mask[:, :, 0] = img*255
+    lase_mask[:3, :, 1] = 255
+    lase_mask[-3:, :, 1] = 255
+    lase_mask[:, :3, 1] = 255
+    lase_mask[:, -3:, 1] = 255
+    return Image.fromarray(lase_mask)
 
 if __name__ == "__main__":
     _, config_path = argv
@@ -149,12 +159,13 @@ if __name__ == "__main__":
     logger.info(f"Selecting AOI centered at x={lng}, y={lat}")
     bbox = make_mercator_bbox(lng, lat, config['horiz_radius'], config['vert_radius'])
     geom = get_geometry(bbox, df)
-    logger.info("Rendering...")
+    logger.info(f"Rendering {len(geom)} polygons...")
     img, draw = rasterize_geometry(geom, bbox, config['y_res'])
     title_font = make_font(config['title_font'], config['title_size'], config['y_res'])
-    subtitle_font = make_font(config['title_font'], config['title_size'], config['y_res'])
+    subtitle_font = make_font(config['subtitle_font'], config['subtitle_size'], config['y_res'])
     dms_string = dms(lng, lat)
     add_text(img, draw, config['city_name'], dms_string, title_font, subtitle_font, config['subtitle'])
+    img = convert_for_lasing(img)
     logger.info(f"Writing to {config['output_name']}")
     output_folder = Path("maps/")
     output_file = output_folder / f"{config['output_name']}.png"

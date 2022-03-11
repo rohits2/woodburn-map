@@ -4,3 +4,12 @@ This is code to generate aerial maps of urban buildings to be fed into a laser e
 
 ## Example Raster
 ![SF Raw Raster](maps/san-francisco.png)
+
+## Example Engraved Result
+
+Side notes: 
+ - This plywood is bad
+ - This stain is worse
+ - The panel as a whole is ~22"x34"
+
+![Real Engraving](images/result.jpg)
